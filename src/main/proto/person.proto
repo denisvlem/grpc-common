@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package person;
+
+option java_package = "com.denisvlem.grpc.person";
+option java_multiple_files = true;
+
+message PersonRequest {
+  int32 user_id = 1;
+}
+
+message PersonResponse {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp birth_date = 3;
+  Sex sex = 4;
+}
+
+message PersonErrorResponse {
+  string message = 1;
+  google.protobuf.Timestamp timeStamp = 2;
+}
+
+enum Sex {
+  MALE = 0;
+  FEMALE = 1;
+}
+
+service PersonService {
+  rpc getPerson(PersonRequest) returns (PersonResponse) {};
+}
